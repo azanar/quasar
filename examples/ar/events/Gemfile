@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+#source 'http://localhost:9292'
+
+gem 'activerecord'
+
+gem 'sqlite3'
+
+#gem 'quasar'
