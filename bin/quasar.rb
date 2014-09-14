@@ -1,9 +1,8 @@
 $LOAD_PATH.push(File.dirname(__FILE__) + '/../lib')
 
-puts $LOAD_PATH
-
 require 'quasar'
 require 'aws'
+
 
 config = {
   :table_name => 'foo',
@@ -17,8 +16,8 @@ AWS.config(
   stub_requests:     true #Quasar.env.test?,
 )
 
-model = Quasar::Model.new(config)
+model = Hydrogen::Model.new(config)
 
-source = Quasar::Source::CSV.new(File.new('data.csv','r'))
+source = Schlepp::Source::CSV.new(File.new('data.csv','r'))
 
 Quasar::Loader.load(source, model)

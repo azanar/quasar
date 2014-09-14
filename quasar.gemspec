@@ -23,6 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'schlepp-aws'
   spec.add_runtime_dependency 'converge'
 
+
+  spec.add_development_dependency 'awesome_print'
   spec.add_development_dependency 'test-unit'
   spec.add_development_dependency 'mocha' 
   spec.add_development_dependency 'simplecov'

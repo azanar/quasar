@@ -1,6 +1,6 @@
 require File.expand_path('../../test_helper', __FILE__)
 
-require 'quasar/table_object'
+require 'hydrogen/table_object'
 
 class Quasar::TableObjectTest < Test::Unit::TestCase
   include TestHelper 
