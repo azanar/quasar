@@ -1,6 +1,6 @@
 require 'hydrogen/table_object'
 require 'hydrogen/table_object/collection'
-#require 'quasar/schlepp/aws/s3/sequencer'
+require 'schlepp-aws/sinks/s3/sequencer'
 require 'schlepp/sinks/fs/sequencer'
 require 'schlepp/sink/sequencer'
 
@@ -12,26 +12,14 @@ module Quasar
 
     def load(source, model)
 
-      l = Schlepp::Sink::Fs::Sequencer.new(model, :chunk_size => 40000)
+      l = Schlepp::AWS::Sink::S3::Sequencer.new(model, :chunk_size => 40000)
 
-      res = Schlepp.schlepp(source, l)
+      b = Hydrogen::TableObject::Collection::Builder.new(model, l)
 
-      #pp res
-      unless res.kind_of?(Hydrogen::TableObject::Collection)
-        raise "Expected TableObject::Collection, got #{res.class}"
-      end
-      puts res.path
+      res = Schlepp.schlepp(source, b)
 
-      aws = Hydrogen::AWS::TableObject.new(res)
-      pp aws
-      puts aws.path
-      puts aws.url
-    end
-
-    def write(data)
-    end
-
-    def push
+      pp res
+      pp res.urls
     end
   end
 end

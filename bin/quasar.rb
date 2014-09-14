@@ -11,9 +11,9 @@ config = {
 }
 
 AWS.config(
-  access_key_id:     'ACCESS_KEY_ID',
-  secret_access_key: 'SECRET_ACCESS_KEY',
-  stub_requests:     true #Quasar.env.test?,
+  access_key_id:     'AKIAJPMXDPOH6JHRJXBQ',
+  secret_access_key: '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',
+  stub_requests:     Quasar.env.test?,
 )
 
 model = Hydrogen::Model.new(config)
