@@ -6,14 +6,11 @@ require 'quasar'
 
 class Quasar::IntegrationTest < Test::Unit::TestCase
   test "stuff" do
-    @mock_model = mock
-    @mock_model.expects(:name).at_least_once.returns("mock_models")
 
-    table_object = Hydrogen::TableObject.new(@mock_model)
+    model = Hydrogen::Model.new({:table_name => "foo"})
 
-    aws_table_object = Hydrogen::AWS::TableObject.new(table_object)
+    source = 100.times.map { ["FOO", "BAR"] }
 
-    l = Schlepp::Sink::Fs::Sequencer.new(table_object, :chunk_size => 40000)
-
+    Quasar::Loader.load(source, model)
   end
 end
