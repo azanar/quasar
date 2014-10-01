@@ -1,8 +1,9 @@
-require 'hydrogen/table_object/collection/builder'
-#require 'schlepp-aws/sinks/s3/sequencer'
-require 'schlepp/sinks/fs/sequencer'
-#require 'schlepp/sink/sequencer'
-require 'converge'
+require 'hydrogen'
+require 'schlepp'
+require 'converge-pg'
+
+require 'schlepp/sinks/fs'
+
 
 module Quasar
   module Loader
@@ -10,14 +11,22 @@ module Quasar
 
     def load(source, model)
 
-      #l = Schlepp::AWS::Sink::S3::Sequencer.new(model, :chunk_size => 40000)
+      config = {
+        :table_name => 'foo',
+        :key => 'foo',
+        :source => {:file => 'data.csv'},
+        :columns => %w{foo bar}
+      }
+
+      model = Hydrogen::Model.new(config)
+
+      source = Schlepp::Source::CSV.new(File.new('data.csv','r'))
+
       l = Schlepp::Sink::Fs::Sequencer.new(model, :chunk_size => 40000)
 
-      b = Hydrogen::TableObject::Collection::Builder.new(model, l)
+      res = Schlepp.schlepp(source, l)
 
-      res = Schlepp.schlepp(source, b)
-
-      Converge.load(res)
+      Converge::Pg.load(model,res)
     end
   end
 end

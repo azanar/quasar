@@ -7,7 +7,7 @@ require 'aws'
 config = {
   :table_name => 'foo',
   :source => {:file => 'data.csv'},
-  :columns => %w{foo bar baz}
+  :columns => %w{foo bar}
 }
 
 AWS.config(
