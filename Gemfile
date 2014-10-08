@@ -5,6 +5,7 @@ gem 'coveralls', require: false
 gem 'converge', :path => "../converge"
 gem 'converge-pg', :path => "../converge-pg"
 gem 'schlepp', :path => "../schlepp"
+gem 'schlepp-sink-fs', :path => "../schlepp-sink-fs"
 gem 'schlepp-aws', :path => "../schlepp-aws"
 gem 'hydrogen', :path => "../hydrogen"
 

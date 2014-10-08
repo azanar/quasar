@@ -1,8 +1,10 @@
 require 'hydrogen'
 require 'schlepp'
+require 'schlepp/sink/filter/csv'
+require 'schlepp/sink/filter/chunker'
 require 'converge-pg'
 
-require 'schlepp/sinks/fs'
+require 'schlepp-sink-fs'
 
 
 module Quasar
@@ -22,9 +24,9 @@ module Quasar
 
       source = Schlepp::Source::CSV.new(File.new('data.csv','r'))
 
-      l = Schlepp::Sink::Fs::Sequencer.new(model, :chunk_size => 40000)
+      sink = Schlepp::Sink::Fs.new(model, :chunk_size => 400, :filters => [Schlepp::Sink::Filter::Csv.new, Schlepp::Sink::Filter::Chunker.new(:chunk_size => 100)])
 
-      res = Schlepp.schlepp(source, l)
+      res = Schlepp.schlepp(source, sink)
 
       Converge::Pg.load(model,res)
     end

@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'punchout'
   spec.add_runtime_dependency 'activesupport'
   spec.add_runtime_dependency 'schlepp-aws'
+  spec.add_runtime_dependency 'schlepp-sink-fs'
   spec.add_runtime_dependency 'converge'
 
 
